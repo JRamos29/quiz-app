@@ -30,9 +30,11 @@ export default class AnswerModel {
         return this.#isRevealed;
     }
 
-
-    get answered() {
-        //FIXME: Implement the method
-        return false;
+    toObject() {
+        return {
+            value: this.#value,
+            isRightAnswer: this.#isRightAnswer,
+            isRevealed: this.#isRevealed,
+        }
     }
 }
