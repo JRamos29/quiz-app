@@ -1,20 +1,15 @@
 import { useState, useEffect } from 'react';
-import AnswerModel from '../model/answer';
 import QuestionModel from '../model/question';
 import Quiz from '../components/Quiz';
-
-const mockQuestion = new QuestionModel(1, 'How many?', [
-  AnswerModel.setWrongAnswer('1'),
-  AnswerModel.setWrongAnswer('2'),
-  AnswerModel.setWrongAnswer('3'),
-  AnswerModel.setRightAnswer('0'),
-]);
+import { useRouter } from 'next/router';
 
 const BASE_URL = 'http://localhost:3000/api';
 
 export default function Home() {
+  const router = useRouter();
+
   const [questionsIdsList, setQuestionsIdsList] = useState<number[]>([]);
-  const [question, setQuestion] = useState<QuestionModel>(mockQuestion);
+  const [question, setQuestion] = useState<QuestionModel>();
   const [rightAnswersList, setRightAnswersList] = useState<number>(0);
 
   async function loadIdsFromQuestions() {
@@ -44,12 +39,36 @@ export default function Home() {
     setRightAnswersList(rightAnswersList + (gotRightAnswer ? 1 : 0));
   }
 
-  function goToNextStep() {}
+  function nextQuestionId() {
+    if (question) {
+      const nextIndex = questionsIdsList.indexOf(question.id) + 1;
+      return questionsIdsList[nextIndex];
+    }
+  }
+
+  function goToNextStep() {
+    const nextId = nextQuestionId();
+    nextId ? goToNextQuestion(nextId) : finishQuiz();
+  }
+
+  function goToNextQuestion(nextId: number) {
+    loadQuestions(nextId);
+  }
+
+  function finishQuiz() {
+    router.push({
+      pathname: '/result',
+      query: {
+        totalQuestions: questionsIdsList.length,
+        totalRight: rightAnswersList,
+      },
+    });
+  }
 
   return (
     <Quiz
       question={question}
-      isLastQuestion={false}
+      isLastQuestion={nextQuestionId() === undefined}
       answeredQuestion={answeredQuestion}
       goToNextStep={goToNextStep}
     />
