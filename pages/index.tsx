@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import Question from '../components/Question';
 import AnswerModel from '../model/answer';
@@ -12,28 +12,42 @@ const mockQuestion = new QuestionModel(1, 'How many?', [
   AnswerModel.setRightAnswer('0'),
 ]);
 
+const BASE_URL = 'http://localhost:3000/api';
+
 export default function Home() {
-  const [question, setQuestion] = useState(mockQuestion);
+  const [questionsIdsList, setQuestionsIdsList] = useState<number[]>([]);
+  const [question, setQuestion] = useState<QuestionModel>(mockQuestion);
+
+  async function loadIdsFromQuestions() {
+    const resp = await fetch(`${BASE_URL}/quiz`);
+    const questionsIdsList = await resp.json();
+    setQuestionsIdsList(questionsIdsList);
+  }
+
+  async function loadQuestions(questionId: number) {
+    const resp = await fetch(`${BASE_URL}/questions/${questionId}`);
+    const json = await resp.json();
+    console.log(json);
+  }
+
+  useEffect(() => {
+    loadIdsFromQuestions();
+  }, []);
+
+  useEffect(() => {
+    questionsIdsList.length > 0 && loadQuestions(questionsIdsList[0]);
+  }, [questionsIdsList]);
 
   function answeredQuestion(question: QuestionModel) {}
 
   function goToNextStep() {}
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-      }}>
-      <Quiz
-        question={question}
-        isLastQuestion={false}
-        answeredQuestion={answeredQuestion}
-        goToNextStep={goToNextStep}
-      />
-    </div>
+    <Quiz
+      question={question}
+      isLastQuestion={false}
+      answeredQuestion={answeredQuestion}
+      goToNextStep={goToNextStep}
+    />
   );
 }
