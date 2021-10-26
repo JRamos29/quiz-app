@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import Button from '../components/Button';
-import Question from '../components/Question';
 import AnswerModel from '../model/answer';
 import QuestionModel from '../model/question';
 import Quiz from '../components/Quiz';
@@ -17,6 +15,7 @@ const BASE_URL = 'http://localhost:3000/api';
 export default function Home() {
   const [questionsIdsList, setQuestionsIdsList] = useState<number[]>([]);
   const [question, setQuestion] = useState<QuestionModel>(mockQuestion);
+  const [rightAnswersList, setRightAnswersList] = useState<number>(0);
 
   async function loadIdsFromQuestions() {
     const resp = await fetch(`${BASE_URL}/quiz`);
@@ -39,7 +38,11 @@ export default function Home() {
     questionsIdsList.length > 0 && loadQuestions(questionsIdsList[0]);
   }, [questionsIdsList]);
 
-  function answeredQuestion(question: QuestionModel) {}
+  function answeredQuestion(question: QuestionModel) {
+    setQuestion(question);
+    const gotRightAnswer = question.gotRightAnswer;
+    setRightAnswersList(rightAnswersList + (gotRightAnswer ? 1 : 0));
+  }
 
   function goToNextStep() {}
 
