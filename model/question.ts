@@ -7,7 +7,7 @@ export default class QuestionModel {
     #answers: AnswerModel[];
     #gotRightAnswer: boolean;
 
-    constructor(id: number, statement: string, answers: [], gotRightAnswer = false) {
+    constructor(id: number, statement: string, answers: AnswerModel[], gotRightAnswer = false) {
         this.#id = id;
         this.#statement = statement;
         this.#answers = answers;

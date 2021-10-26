@@ -4,11 +4,20 @@ export default class AnswerModel {
     #isRevealed: boolean;
 
 
-    constructor(value: string, isRightAnswer: boolean, isRevealed: boolean) {
+    constructor(value: string, isRightAnswer: boolean, isRevealed = false) {
         this.#value = value;
         this.#isRightAnswer = isRightAnswer;
         this.#isRevealed = isRevealed;
 
+    }
+
+    static setRightAnswer(value: string) {
+        return new AnswerModel(value, true);
+        
+    }
+
+    static setWrongAnswer(value: string) {
+        return new AnswerModel(value, false);
     }
 
     get value() {
