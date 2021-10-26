@@ -1,4 +1,5 @@
 import AnswerModel from './answer';
+import { shuffle } from '../functions/arrays';
 
 export default class QuestionModel {
 
@@ -32,6 +33,15 @@ export default class QuestionModel {
             if (answer.isRevealed) return true;
         }
         return false;
+    }
+
+    // answerWith(index: number): QuestionModel{
+
+    // }
+
+    shuffleAnswers(): QuestionModel {
+      let shuffledAnswers = shuffle(this.#answers);
+      return new QuestionModel(this.#id, this.#statement, shuffledAnswers, this.#gotRightAnswer);
     }
 
     toObject() {

@@ -1,5 +1,7 @@
+import { shuffle } from '../../../functions/arrays';
 import questions from '../questionsDb';
 
 export default function handler(req, res) {
-    res.status(200).json(questions.map(questao => questao.id));
+    const ids = questions.map(question => question.id)
+    res.status(200).json(shuffle(ids));
 }
