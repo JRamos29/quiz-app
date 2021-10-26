@@ -13,7 +13,7 @@ export default class AnswerModel {
 
     static setRightAnswer(value: string) {
         return new AnswerModel(value, true);
-        
+
     }
 
     static setWrongAnswer(value: string) {
@@ -29,6 +29,10 @@ export default class AnswerModel {
     get isRevealed() {
         return this.#isRevealed;
     }
+
+  reveal() {
+    return new AnswerModel(this.#value, this.#isRightAnswer, true);
+  }
 
     toObject() {
         return {
