@@ -3,6 +3,7 @@ import Button from '../components/Button';
 import Question from '../components/Question';
 import AnswerModel from '../model/answer';
 import QuestionModel from '../model/question';
+import Quiz from '../components/Quiz';
 
 const mockQuestion = new QuestionModel(1, 'How many?', [
   AnswerModel.setWrongAnswer('1'),
@@ -14,16 +15,9 @@ const mockQuestion = new QuestionModel(1, 'How many?', [
 export default function Home() {
   const [question, setQuestion] = useState(mockQuestion);
 
-  function onAnswer(index: number) {
-    console.log(index);
-    setQuestion(question.answerWith(index));
-  }
+  function answeredQuestion(question: QuestionModel) {}
 
-  function onTimeout() {
-    if (question.notAnswered) {
-      setQuestion(question.answerWith(-1));
-    }
-  }
+  function goToNextStep() {}
 
   return (
     <div
@@ -34,13 +28,12 @@ export default function Home() {
         alignItems: 'center',
         height: '100vh',
       }}>
-      <Question
-        value={question}
-        timeToAnswer={5}
-        onAnswer={onAnswer}
-        onTimeout={onTimeout}
+      <Quiz
+        question={question}
+        isLastQuestion={false}
+        answeredQuestion={answeredQuestion}
+        goToNextStep={goToNextStep}
       />
-      <Button text="Next Question" href="/result" />
     </div>
   );
 }
