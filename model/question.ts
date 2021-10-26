@@ -35,9 +35,9 @@ export default class QuestionModel {
         return false;
     }
 
-    // answerWith(index: number): QuestionModel{
-
-    // }
+    answerWith(index: number):QuestionModel {
+      return new QuestionModel(1, '', []);
+    }
 
     shuffleAnswers(): QuestionModel {
       let shuffledAnswers = shuffle(this.#answers);

@@ -1,17 +1,22 @@
-import Head from 'next/head';
-import Image from 'next/image';
+import { useState } from 'react';
 import Question from '../components/Question';
 import AnswerModel from '../model/answer';
 import QuestionModel from '../model/question';
-import styles from '../styles/Home.module.css';
+
+const mockQuestion = new QuestionModel(1, 'How many?', [
+  AnswerModel.setWrongAnswer('1'),
+  AnswerModel.setWrongAnswer('2'),
+  AnswerModel.setWrongAnswer('3'),
+  AnswerModel.setRightAnswer('0'),
+]);
 
 export default function Home() {
-  const testQuestion = new QuestionModel(1, 'How many?', [
-    AnswerModel.setWrongAnswer('1'),
-    AnswerModel.setWrongAnswer('2'),
-    AnswerModel.setWrongAnswer('3'),
-    AnswerModel.setRightAnswer('0'),
-  ]);
+  const [question, setQuestion] = useState(mockQuestion);
+
+  function onAnswer(index: number) {
+    console.log(index);
+    setQuestion(question.answerWith(index));
+  }
 
   return (
     <div
@@ -21,7 +26,7 @@ export default function Home() {
         alignItems: 'center',
         height: '100vh',
       }}>
-      <Question value={testQuestion} />
+      <Question value={question} onAnswer={onAnswer} />
     </div>
   );
 }

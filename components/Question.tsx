@@ -3,8 +3,16 @@ import QuestionModel from '../model/question';
 import Statement from './Statement';
 import Answer from './Answer';
 
+const options = [
+  { value: 'A', color: '#f2c866' },
+  { value: 'B', color: '#f266ba' },
+  { value: 'C', color: '#85d4f2' },
+  { value: 'D', color: '#bce596' },
+];
+
 interface QuestionProps {
   value: QuestionModel;
+  onAnswer: (index: number) => void;
 }
 
 export default function Question(props: QuestionProps) {
@@ -17,8 +25,9 @@ export default function Question(props: QuestionProps) {
           key={i}
           value={answer}
           index={i}
-          option="A"
-          optionBgColor="#f2c866"
+          option={options[i].value}
+          optionBgColor={options[i].color}
+          onAnswer={props.onAnswer}
         />
       );
     });
