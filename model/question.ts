@@ -55,6 +55,11 @@ export default class QuestionModel {
       return new QuestionModel(this.#id, this.#statement, shuffledAnswers, this.#gotRightAnswer);
     }
 
+  static parseObjectToModel(object: QuestionModel): QuestionModel {
+    const answers = object.answers.map(answer => AnswerModel.parseObjectToModel(answer));
+      return new QuestionModel(object.id, object.statement, answers, object.gotRightAnswer);
+      }
+
     toObject() {
         return {
             id: this.#id,

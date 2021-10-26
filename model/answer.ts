@@ -30,9 +30,13 @@ export default class AnswerModel {
         return this.#isRevealed;
     }
 
-  reveal() {
-    return new AnswerModel(this.#value, this.#isRightAnswer, true);
-  }
+    reveal() {
+      return new AnswerModel(this.#value, this.#isRightAnswer, true);
+    }
+
+  static parseObjectToModel(object: AnswerModel): AnswerModel {
+    return new AnswerModel(object.value, object.isRightAnswer, object.isRevealed);
+    }
 
     toObject() {
         return {

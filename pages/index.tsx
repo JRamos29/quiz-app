@@ -27,7 +27,8 @@ export default function Home() {
   async function loadQuestions(questionId: number) {
     const resp = await fetch(`${BASE_URL}/questions/${questionId}`);
     const json = await resp.json();
-    console.log(json);
+    const newQuestion = QuestionModel.parseObjectToModel(json);
+    setQuestion(newQuestion);
   }
 
   useEffect(() => {
