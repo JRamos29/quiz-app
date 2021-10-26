@@ -13,7 +13,13 @@ export default function Question(props: QuestionProps) {
   function renderAnswers() {
     return question.answers.map((answer, i) => {
       return (
-        <Answer value={answer} index={i} option="A" optionColor="#f2c866" />
+        <Answer
+          key={i}
+          value={answer}
+          index={i}
+          option="A"
+          optionBgColor="#f2c866"
+        />
       );
     });
   }

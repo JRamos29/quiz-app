@@ -5,7 +5,7 @@ interface AnswerProps {
   value: AnswerModel;
   index: number;
   option: string;
-  optionColor: string;
+  optionBgColor: string;
 }
 
 export default function Answer(props: AnswerProps) {
@@ -15,7 +15,11 @@ export default function Answer(props: AnswerProps) {
     <div className={styles.answer}>
       <div className={styles.answerContent}>
         <div className={styles.front}>
-          <div className={styles.option}>{props.option}</div>
+          <div
+            className={styles.option}
+            style={{ backgroundColor: props.optionBgColor }}>
+            {props.option}
+          </div>
           <div className={styles.value}>{answer.value}</div>
         </div>
         <div className={styles.back}></div>
