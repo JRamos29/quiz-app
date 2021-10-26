@@ -1,5 +1,7 @@
 import styles from '../styles/Result.module.css';
 import { useRouter } from 'next/router';
+import Statistics from '../components/Statistics';
+import Button from '../components/Button';
 
 export default function result() {
   const router = useRouter();
@@ -11,9 +13,16 @@ export default function result() {
   return (
     <div className={styles.result}>
       <h1>Final Score</h1>
-      <div>{totalQuestions}</div>
-      <div>{totalRight}</div>
-      <div>{`${percentage}%`}</div>
+      <div style={{ display: 'flex' }}>
+        <Statistics text="Questions" value={totalQuestions} />
+        <Statistics text="Right Answers" value={totalRight} bgColor="#9cd2a4" />
+        <Statistics
+          text="Percentage"
+          value={`${percentage}%`}
+          bgColor="#de6a33"
+        />
+      </div>
+      <Button href="/" text="Try Again" />
     </div>
   );
 }

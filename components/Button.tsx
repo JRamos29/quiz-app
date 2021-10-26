@@ -4,7 +4,7 @@ import Link from 'next/link';
 interface ButtonProps {
   href?: string;
   text: string;
-  onClick: (e: any) => void;
+  onClick?: (e: any) => void;
 }
 
 export default function Button(props: ButtonProps) {
