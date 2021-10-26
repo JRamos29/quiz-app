@@ -18,19 +18,19 @@ const questions: QuestionModel[] = [
         AnswerModel.setRightAnswer('A flow of electrons'),
     ]),
 
-    // new QuestionModel(3, 'Which of the following is not an international organisation ?', [
-    //     AnswerModel.setWrongAnswer('FIFA'),
-    //     AnswerModel.setWrongAnswer('NATO'),
-    //     AnswerModel.setWrongAnswer('ASEAN'),
-    //     AnswerModel.setRightAnswer('FBI'),
-    // ]),
+    new QuestionModel(3, 'Which of the following is not an international organisation ?', [
+        AnswerModel.setWrongAnswer('FIFA'),
+        AnswerModel.setWrongAnswer('NATO'),
+        AnswerModel.setWrongAnswer('ASEAN'),
+        AnswerModel.setRightAnswer('FBI'),
+    ]),
 
-    // new QuestionModel(4, 'Which of the following disorders is the fear of being alone ?', [
-    //     AnswerModel.setWrongAnswer('Aerophobia'),
-    //     AnswerModel.setWrongAnswer('Acrophobia'),
-    //     AnswerModel.setWrongAnswer('Arachnophobia'),
-    //     AnswerModel.setRightAnswer('Agoraphobia'),
-    // ]),
+    new QuestionModel(4, 'Which of the following disorders is the fear of being alone ?', [
+        AnswerModel.setWrongAnswer('Aerophobia'),
+        AnswerModel.setWrongAnswer('Acrophobia'),
+        AnswerModel.setWrongAnswer('Arachnophobia'),
+        AnswerModel.setRightAnswer('Agoraphobia'),
+    ]),
 
     // new QuestionModel(5, 'Which of the following is a song by the German heavy metal band “Scorpions” ?', [
     //     AnswerModel.setWrongAnswer('Stairway to Heaven'),
