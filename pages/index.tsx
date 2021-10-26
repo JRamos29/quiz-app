@@ -32,7 +32,12 @@ export default function Home() {
         alignItems: 'center',
         height: '100vh',
       }}>
-      <Question value={question} onAnswer={onAnswer} onTimeout={onTimeout} />
+      <Question
+        value={question}
+        timeToAnswer={5}
+        onAnswer={onAnswer}
+        onTimeout={onTimeout}
+      />
     </div>
   );
 }
