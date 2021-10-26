@@ -18,6 +18,12 @@ export default function Home() {
     setQuestion(question.answerWith(index));
   }
 
+  function onTimeout() {
+    if (question.notAnswered) {
+      setQuestion(question.answerWith(-1));
+    }
+  }
+
   return (
     <div
       style={{
@@ -26,7 +32,7 @@ export default function Home() {
         alignItems: 'center',
         height: '100vh',
       }}>
-      <Question value={question} onAnswer={onAnswer} />
+      <Question value={question} onAnswer={onAnswer} onTimeout={onTimeout} />
     </div>
   );
 }
